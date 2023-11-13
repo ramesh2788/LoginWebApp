@@ -14,20 +14,22 @@ pipeline {
         ARTIFACT_VERSION = "${BUILD_NUMBER}"
     }
 
+    pipeline {
+    agent any
+
     stages {
-        stage("Check out") {
+        stage('checkout') {
             steps {
-                script {
-                    git 'https://github.com/mohanlucky2/LoginWebApp.git'
-                }
-                }
-              stage("build") {
+                git 'https://github.com/mohanlucky2/LoginWebApp.git'
+            }
+        }
+        stage('build') {
             steps {
                 sh 'mvn clean package'
             }
         }
-            }
-        }
+    }
+}
 
       
 
