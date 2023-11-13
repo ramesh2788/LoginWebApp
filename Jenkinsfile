@@ -6,11 +6,12 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "54.82.252.184:8081"
+        NEXUS_URL = "54.162.72.162:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "LoginWebApp"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexuscred"
+        ARTIFACT_VERSION = "${BUILD_NUMBER}"
     }
 
     stages {
