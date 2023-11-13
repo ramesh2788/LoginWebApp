@@ -21,14 +21,15 @@ pipeline {
                     git 'https://github.com/mohanlucky2/LoginWebApp.git'
                 }
                 }
-            }
-        }
-
-        stage("build") {
+              stage("build") {
             steps {
                 sh 'mvn clean package'
             }
         }
+            }
+        }
+
+      
 
         stage("publish to nexus") {
             steps {
