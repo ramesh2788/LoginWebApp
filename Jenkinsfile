@@ -14,9 +14,6 @@ pipeline {
         ARTIFACT_VERSION = "${BUILD_NUMBER}"
     }
 
-    pipeline {
-    agent any
-
     stages {
         stage('checkout') {
             steps {
@@ -29,7 +26,7 @@ pipeline {
             }
         }
     }
-}
+
 
       
 
