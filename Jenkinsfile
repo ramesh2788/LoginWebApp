@@ -1,34 +1,40 @@
 pipeline {
     agent any
-       environment {
+    tools {
+        maven "localMaven"
+        jdk "Java8"
+    }
+
+    environment {
         // This can be nexus3 or nexus2
         NEXUS_VERSION = "nexus3"
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "54.162.72.162:8081"
+        NEXUS_URL = "54.86.67.236:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "LoginWebApp"
         // Jenkins credential id to authenticate to Nexus OSS
-        NEXUS_CREDENTIAL_ID = "nexuscred"
+        NEXUS_CREDENTIAL_ID = "nexusCredential"
         ARTIFACT_VERSION = "${BUILD_NUMBER}"
     }
 
     stages {
-        stage('checkout') {
+        stage("Check out") {
             steps {
-                git 'https://github.com/mohanlucky2/LoginWebApp.git'
+                script {
+                    git branch: 'feature/nexusUpload', url: 'https://github.com/mohanlucky2/LoginWebApp.git';
+                }
             }
         }
-        stage('build') {
+
+        stage("mvn build") {
             steps {
-                sh 'mvn clean package'
+                script {
+                    sh "mvn clean package"
+                }
             }
         }
-    }
-
-
-      
 
         stage("publish to nexus") {
             steps {
@@ -70,6 +76,5 @@ pipeline {
                 }
             }
         }
-        
     }
-
+}
